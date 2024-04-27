@@ -1,0 +1,21 @@
+{
+  "task": [
+    {
+      "id": 1,
+      "taskname": "walk",
+      "category": "exercise"
+    },
+
+    {
+      "id": 2,
+      "taskname": "Yoga",
+      "category": "exercise"
+    },
+
+    {
+      "id": 3,
+      "taskname": "Read Bangla Books",
+      "category": "reading"
+    }
+  ]
+}
