@@ -10,14 +10,14 @@ export const AddTask = () => {
   const { refetch } = useGetAllTaskQuery("");
   const [taskData, setTaskData] = useState({
     taskname: "",
-    category: "",
+    category: "Exercise",
     status: "Incomplete",
   });
   const addHandler = async () => {
     try {
       await addTask(taskData).unwrap();
       refetch();
-      setTaskData({ taskname: "", category: "", status: "Incomplete" });
+      setTaskData({ taskname: "", category: "Exercise", status: "Incomplete" });
       toast.success("Task added successfully!");
     } catch (error) {
       console.error("Error adding task:", error);
@@ -30,7 +30,7 @@ export const AddTask = () => {
 
   return (
     <div className="bg-slate-100 p-4">
-      <div className="container mx-auto text-center mt-7  flex flex-col w-1/4 gap-4">
+      <div className="container mx-2 md:mx-auto text-center mt-7  flex flex-col w-full md:w-1/4 gap-4">
         <h1 className="text-2xl font-bold">Add Task</h1>
         <input
           type="text"
@@ -41,15 +41,17 @@ export const AddTask = () => {
           placeholder="Enter task name"
           required
         />
-        <input
-          type="text"
+        <select
           name="category"
-          className="input input-bordered w-fulls"
           value={taskData.category}
           onChange={handleChange}
-          placeholder="Enter category"
-          required
-        />
+          className="select select-bordered w-full"
+        >
+          <option value="Exercise">Exercise</option>
+          <option value="Reading">Reading</option>
+          <option value="Playing">Playing</option>
+        </select>
+
         <select
           name="status"
           value={taskData.status}

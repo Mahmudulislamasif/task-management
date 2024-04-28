@@ -9,6 +9,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { AddTask } from "@/components/Layout/AddTask";
 import { FaXmark } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+
 export default function Home() {
   const { data } = useGetAllTaskQuery("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -49,7 +50,7 @@ export default function Home() {
             onChange={handleCategoryChange}
             className="select select-bordered  "
           >
-            <option value="All">AlL</option>
+            <option value="All">ALL</option>
             <option value="Exercise">Exercise</option>
             <option value="Reading">Reading</option>
             <option value="Playing">Playing</option>
@@ -71,11 +72,11 @@ const TaskList = ({ tasks }: any) => {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
   const [editedTask, setEditedTask] = useState<any>({
     taskname: "",
-    category: "",
+    category: "Exercise",
     status: "Incomplete",
   });
   const handleDelete = async (id: any) => {
-    deleteTask(id);
+    await deleteTask(id).unwrap();
     refetch();
   };
   const handleEdit = (task: any) => {
@@ -157,14 +158,16 @@ const TaskList = ({ tasks }: any) => {
                 className="input input-bordered mb-2"
                 placeholder="Enter task name"
               />
-              <input
-                type="text"
+              <select
                 name="category"
                 value={editedTask.category}
                 onChange={handleChange}
-                className="input input-bordered mb-2"
-                placeholder="Enter category"
-              />
+                className="select select-bordered w-full"
+              >
+                <option value="Exercise">Exercise</option>
+                <option value="Reading">Reading</option>
+                <option value="Playing">Playing</option>
+              </select>
               <select
                 name="status"
                 value={editedTask.status}
