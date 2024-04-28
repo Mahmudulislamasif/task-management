@@ -1,15 +1,24 @@
 import { useState } from "react";
-import { useCreatTaskMutation, useGetAllTaskQuery } from "../stores/slices/PostTask";
-
+import {
+  useCreatTaskMutation,
+  useGetAllTaskQuery,
+} from "../stores/slices/PostTask";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const AddTask = () => {
   const [addTask] = useCreatTaskMutation();
   const { refetch } = useGetAllTaskQuery("");
-  const [taskData, setTaskData] = useState({ taskname: "", category: "" });
+  const [taskData, setTaskData] = useState({
+    taskname: "",
+    category: "",
+    status: "Incomplete",
+  });
   const addHandler = async () => {
     try {
       await addTask(taskData).unwrap();
       refetch();
-      setTaskData({ taskname: "", category: "" });
+      setTaskData({ taskname: "", category: "", status: "Incomplete" });
+      toast.success("Task added successfully!");
     } catch (error) {
       console.error("Error adding task:", error);
     }
@@ -30,6 +39,7 @@ export const AddTask = () => {
           value={taskData.taskname}
           onChange={handleChange}
           placeholder="Enter task name"
+          required
         />
         <input
           type="text"
@@ -38,10 +48,21 @@ export const AddTask = () => {
           value={taskData.category}
           onChange={handleChange}
           placeholder="Enter category"
+          required
         />
+        <select
+          name="status"
+          value={taskData.status}
+          onChange={handleChange}
+          className="select select-bordered w-full"
+        >
+          <option value="Incomplete">Incomplete</option>
+          <option value="Complete">Complete</option>
+        </select>
         <button className="btn btn-info text-white w-full" onClick={addHandler}>
           Add
         </button>
+        <ToastContainer />
       </div>
     </div>
   );

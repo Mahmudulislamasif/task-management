@@ -6,9 +6,11 @@ export const postTask = createApi({
   reducerPath: 'postTask',
   baseQuery:  fetchBaseQuery({ baseUrl: 'https://662cc3730547cdcde9df14e0.mockapi.io/' }), // Use local JSON data directly
   endpoints: (builder) => ({
-  
     getAllTask: builder.query({
        query: () => 'crud'
+    }),
+     getIndividualTask: builder.query({
+       query: (id) => `crud/${id}`
     }),
     creatTask:builder.mutation({
       query: (data) => ({
@@ -35,4 +37,4 @@ export const postTask = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllTaskQuery, useCreatTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } = postTask;
+export const { useGetAllTaskQuery,useGetIndividualTaskQuery, useCreatTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } = postTask;
