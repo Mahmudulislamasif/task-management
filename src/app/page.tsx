@@ -6,9 +6,10 @@ import {
   useUpdateTaskMutation,
 } from "@/components/stores/slices/PostTask";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { AddTask } from "@/components/Layout/AddTask";
+
 import { FaXmark } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import MainLayout from "@/components/Layout/Layout";
 
 export default function Home() {
   const { data } = useGetAllTaskQuery("");
@@ -27,39 +28,34 @@ export default function Home() {
     );
   });
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-lg">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Task Management</a>
+    <MainLayout>
+      <div>
+        <div className="bg-slate-100">
+          <div className="container mx-auto text-center   flex flex-col w-full md:w-1/4 gap-4 ">
+            <h1 className="text-2xl font-bold mt-5">Filter</h1>
+            <input
+              className=" input input-bordered"
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="Search Task"
+            />
+            <select
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="select select-bordered  "
+            >
+              <option value="All">ALL</option>
+              <option value="Exercise">Exercise</option>
+              <option value="Reading">Reading</option>
+              <option value="Playing">Playing</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <AddTask />
 
-      <div className="bg-slate-100">
-        <div className="container mx-auto text-center   flex flex-col w-full md:w-1/4 gap-4 ">
-          <h1 className="text-2xl font-bold">Filter</h1>
-          <input
-            className=" input input-bordered"
-            type="text"
-            value={searchTerm}
-            onChange={handleSearch}
-            placeholder="Search Task"
-          />
-          <select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="select select-bordered  "
-          >
-            <option value="All">ALL</option>
-            <option value="Exercise">Exercise</option>
-            <option value="Reading">Reading</option>
-            <option value="Playing">Playing</option>
-          </select>
-        </div>
+        <TaskList tasks={filteredData} />
       </div>
-
-      <TaskList tasks={filteredData} />
-    </div>
+    </MainLayout>
   );
 }
 
