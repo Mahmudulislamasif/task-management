@@ -31,7 +31,7 @@ export default function Home() {
     <MainLayout>
       <div>
         <div className="bg-slate-100">
-          <div className="container mx-auto text-center   flex flex-col w-full md:w-1/4 gap-4 ">
+          <div className="container mx-auto text-center   flex flex-col w-full md:w-1/4 gap-4 p-[20px]">
             <h1 className="text-2xl font-bold mt-5">Filter</h1>
             <input
               className=" input input-bordered"
@@ -99,7 +99,7 @@ const TaskList = ({ tasks }: any) => {
     setEditedTask({ ...editedTask, [name]: value });
   };
   return (
-    <div className="bg-slate-100 py-7">
+    <div className="bg-slate-100 py-7 px-2 min-h-screen">
       <div className="overflow-x-auto container mx-auto w-full md:w-1/2 bg-slate-700 text-white">
         <table className="table ">
           {/* table head */}

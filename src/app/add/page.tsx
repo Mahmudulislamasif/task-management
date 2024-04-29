@@ -32,8 +32,8 @@ export default function AddTask() {
 
   return (
     <MainLayout>
-      <div className="bg-slate-100 ">
-        <div className="container  md:mx-auto text-center  flex flex-col w-full md:w-1/4 gap-4">
+      <div className="bg-slate-100 min-h-screen flex justify-center items-center">
+        <div className="container mx-auto w-full md:w-1/3 text-center flex flex-col gap-4 p-8 bg-white rounded-lg shadow-lg">
           <h1 className="text-2xl font-bold">Add Task</h1>
           <input
             type="text"
